@@ -41,9 +41,13 @@ open class ZKPageTitleView: UIView {
         }
     }
     
+    var items: [ZKPageTitleItem] {
+        return titleStackView.arrangedSubviews as! [ZKPageTitleItem]
+    }
+    
     var floatIndex: CGFloat = 0 {
         didSet {
-            let items = titleStackView.arrangedSubviews as! [ZKPageTitleItem]
+            let items = self.items
             let leftIndex = Int(floor(floatIndex))
             let rightIndex = Int(ceil(floatIndex))
             
@@ -98,7 +102,7 @@ open class ZKPageTitleView: UIView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        sliderView.frame.origin.y = self.bounds.maxY - 2
+        sliderView.frame.origin.y = self.bounds.maxY - sliderView.bounds.height
         setCurrentIndex(index: currentIndex, animated: false)
     }
     

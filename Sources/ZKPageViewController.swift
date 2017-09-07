@@ -10,10 +10,19 @@ import UIKit
 import SnapKit
 
 public extension UIViewController {
-    var pageViewController: ZKPageViewController? {
-        return self.parent as? ZKPageViewController
+    public var pageViewController: ZKPageViewController? {
+        var vc = parent
+        while vc != nil {
+            if vc is ZKPageViewController {
+                return vc as? ZKPageViewController
+            } else {
+                vc = vc?.parent
+            }
+        }
+        return nil
     }
 }
+
 
 public protocol ZKPageViewControllerDataSource: class {
     func numberOfPages(_ pageViewController: ZKPageViewController) -> Int
@@ -45,9 +54,7 @@ open class ZKPageViewController: UIViewController {
             titleView.reloadItems()
         }
     }
-    
-//    private var targetSize: CGSize {
-    
+        
     open var currentIndex: Int {
         set {
             titleView.currentIndex = newValue
@@ -66,7 +73,11 @@ open class ZKPageViewController: UIViewController {
         
         titleView.snp.makeConstraints { (make) in
             make.height.equalTo(titleHeight)
-            make.top.equalTo(topLayoutGuide.snp.bottom)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(view.safeAreaLayoutGuide)
+            } else {
+                make.top.equalTo(topLayoutGuide.snp.bottom)
+            }
             make.left.right.equalToSuperview()
         }
         titleView.delegate = self
