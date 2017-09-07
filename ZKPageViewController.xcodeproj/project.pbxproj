@@ -24,6 +24,7 @@
 		12C1B5F91F60F8AC00C4417C /* ZKPageViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 127191001F60E667007CE694 /* ZKPageViewController.framework */; };
 		12C1B5FC1F60FA2100C4417C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12C1B5F81F60F86400C4417C /* Main.storyboard */; };
 		12C1B5FD1F60FA2A00C4417C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1271911A1F60E6D4007CE694 /* LaunchScreen.storyboard */; };
+		12C1B61C1F6117E400C4417C /* DynamicColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C1B5EB1F60F78E00C4417C /* DynamicColor.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12390ADC1F60F44C00F9E5DB /* SnapKit.framework in Frameworks */,
+				12C1B61C1F6117E400C4417C /* DynamicColor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
