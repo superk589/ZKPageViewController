@@ -1,0 +1,5 @@
+[submodule "Carthage/Checkouts/SnapKit"]
+	url = https://github.com/SnapKit/SnapKit.git
+[submodule "Carthage/Checkouts/DynamicColor"]
+	path = Carthage/Checkouts/DynamicColor
+	url = https://github.com/yannickl/DynamicColor.git
