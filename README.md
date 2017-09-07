@@ -3,8 +3,8 @@ A PageViewController with a custom title view
 
 ## Installation
 
-### Cocoapods
-Why not support Cocoapods now, because ZKPageViewController written in Swift 4.0 and uses other frameworks written in Swift 3.2. Cocoapods cannot manage multi-versions right now.
+### CocoaPods
+ZKPageViewController is written in Swift 4.0 and have dependencies written in Swift 3.2. CocoaPods cannot manage multi-versions right now. Please use Carthage or integrate manually.
 <!-- ### CocoaPods
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
