@@ -150,6 +150,13 @@ extension ZKPageViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return cell
     }
     
+    public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let vc = dataSource?.pageViewController(self, viewControllerAt: indexPath.item) {
+            vc.beginAppearanceTransition(true, animated: false)
+            vc.endAppearanceTransition()
+        }
+    }
+    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }

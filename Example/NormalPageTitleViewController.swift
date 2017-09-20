@@ -12,7 +12,7 @@ import ZKPageViewController
 class NormalPageTitleViewController: ZKPageViewController, ZKPageViewControllerDelegate, ZKPageViewControllerDataSource {
 
     var titleItems = [ZKPageTitleItem]()
-    var viewControllers = [ViewController(), ViewController(), ViewController()]
+    var viewControllers = [UITableViewController(), ViewController(), ViewController()]
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -42,7 +42,8 @@ class NavigationTitleExampleViewController: ZKPageViewController, ZKPageViewCont
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTitleItems()
-        navigationController?.navigationBar.addSubview(titleView)
+        navigationItem.titleView = titleView
+        
         titleView.snp.remakeConstraints { (make) in
             make.height.equalTo(titleHeight)
             make.top.equalToSuperview()
@@ -58,6 +59,11 @@ class NavigationTitleExampleViewController: ZKPageViewController, ZKPageViewCont
         self.delegate = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        titleView.setCurrentIndex(index: currentIndex, animated: false)
+    }
+    
     private func prepareTitleItems() {
         for i in 0..<3 {
             let item = CustomPageTitleItem()
@@ -70,6 +76,8 @@ class NavigationTitleExampleViewController: ZKPageViewController, ZKPageViewCont
             titleItems.append(item)
         }
     }
+    
+    
     
     func numberOfPages(_ pageViewController: ZKPageViewController) -> Int {
         return 3
