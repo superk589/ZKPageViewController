@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ZKPageViewController"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "A PageViewController with a custom title view"
   s.description  = <<-DESC
                    A light-weighted PageViewController with a custom title view in swift.
