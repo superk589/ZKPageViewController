@@ -187,7 +187,7 @@ extension ZKPageViewController {
 extension ZKPageViewController: ZKPageTitleViewDelegate {
     
     public func pageTitleView(_ pageTitleView: ZKPageTitleView, didSelect index: Int) {
-        collectionView.setContentOffset(CGPoint(x: CGFloat(index) * self.collectionView.bounds.size.width, y: 0), animated: true)
+        collectionView.setContentOffset(CGPoint(x: CGFloat(index) * collectionView.bounds.size.width, y: collectionView.contentOffset.y), animated: true)
         pageTitleView.setCurrentIndex(index: index, animated: true)
     }
     
