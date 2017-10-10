@@ -19,6 +19,9 @@ class NormalPageTitleViewController: ZKPageViewController, ZKPageViewControllerD
         prepareTitleItems()
         self.dataSource = self
         self.delegate = self
+        
+        // if true devices below iOS 11.0 will have layout issue
+        automaticallyAdjustsScrollViewInsets = false
     }
     
     private func prepareTitleItems() {
