@@ -75,9 +75,9 @@ open class ZKPageTitleView: UIView {
         }
     }
     
-    open let sliderView = UIView(frame: CGRect.init(x: 0, y: 0, width: 10, height: 2))
+    public let sliderView = UIView(frame: CGRect.init(x: 0, y: 0, width: 10, height: 2))
     
-    open let titleStackView = UIStackView()
+    public let titleStackView = UIStackView()
     
     weak var delegate: ZKPageTitleViewDelegate?
     weak var dataSource: ZKPageTitleViewDataSource?
