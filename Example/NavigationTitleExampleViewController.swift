@@ -10,6 +10,7 @@ import UIKit
 import ZKPageViewController
 
 class CustomPageTitleItem: ZKPageTitleItem {
+    
     override var sliderInset: UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: icon.frame.minX, bottom: 0, right: bounds.maxX - label.frame.maxX)
     }
@@ -76,8 +77,6 @@ class NavigationTitleExampleViewController: ZKPageViewController, ZKPageViewCont
             titleItems.append(item)
         }
     }
-    
-    
     
     func numberOfPages(_ pageViewController: ZKPageViewController) -> Int {
         return 3

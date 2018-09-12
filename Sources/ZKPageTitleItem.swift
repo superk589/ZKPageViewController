@@ -12,7 +12,7 @@ import DynamicColor
 
 open class ZKPageTitleItem: UIView {
     
-    open let label = UILabel()
+    public let label = UILabel()
     
     open var normalColor: UIColor = .darkGray
     
