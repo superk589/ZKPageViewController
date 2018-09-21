@@ -15,7 +15,7 @@ class CustomPageTitleItem: ZKPageTitleItem {
         return UIEdgeInsets(top: 0, left: icon.frame.minX, bottom: 0, right: bounds.maxX - label.frame.maxX)
     }
     
-    let icon = UIButton(type: UIButtonType.infoLight)
+    let icon = UIButton(type: .infoLight)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

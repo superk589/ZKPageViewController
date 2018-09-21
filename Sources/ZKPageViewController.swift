@@ -140,12 +140,12 @@ extension ZKPageViewController: UICollectionViewDelegate, UICollectionViewDataSo
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PageCell", for: indexPath)
         if let vc = dataSource?.pageViewController(self, viewControllerAt: indexPath.item) {
-            self.addChildViewController(vc)
+            self.addChild(vc)
             cell.contentView.addSubview(vc.view)
             vc.view.snp.remakeConstraints { (remake) in
                 remake.edges.equalTo(cell.contentView)
             }
-            vc.didMove(toParentViewController: self)
+            vc.didMove(toParent: self)
         }
         return cell
     }
