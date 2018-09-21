@@ -25,4 +25,10 @@ open class ZKPageCollectionView: UICollectionView {
         backgroundColor = UIColor.white
         isPagingEnabled = true
     }
+
+    @available(iOS 11.0, *)
+    open override func adjustedContentInsetDidChange() {
+        super.adjustedContentInsetDidChange()
+        collectionViewLayout.invalidateLayout()
+    }
 }
