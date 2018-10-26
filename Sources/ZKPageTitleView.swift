@@ -26,6 +26,9 @@ open class ZKPageTitleView: UIView {
             return Int(round(floatIndex))
         }
         set {
+            guard items.count > currentIndex else {
+                return
+            }
             items[currentIndex].inoutProgress = 0
             floatIndex = CGFloat(newValue)
         }
