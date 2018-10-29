@@ -119,6 +119,10 @@ open class ZKPageViewController: UIViewController {
         }
     }
     
+    open func reloadData() {
+        collectionView.reloadData()
+        titleView.reloadItems()
+    }
 }
 
 // MARK: UICollectionViewDelagte & DataSource
