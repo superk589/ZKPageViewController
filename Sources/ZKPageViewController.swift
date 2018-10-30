@@ -34,7 +34,7 @@ public protocol ZKPageViewControllerDelegate: class {
     func pageViewController(_ pageViewController: ZKPageViewController, willShow viewController: UIViewController)
 }
 
-open class ZKPageViewController: UIViewController {
+open class ZKPageViewController: UIViewController, ZKPageTitleViewDelegate, ZKPageTitleViewDataSource {
     
     open var titleView: ZKPageTitleView = ZKPageTitleView()
     open var collectionView: ZKPageCollectionView = ZKPageCollectionView()
@@ -123,6 +123,19 @@ open class ZKPageViewController: UIViewController {
         collectionView.reloadData()
         titleView.reloadItems()
     }
+    
+    public func pageTitleView(_ pageTitleView: ZKPageTitleView, didSelect index: Int) {
+        collectionView.setContentOffset(CGPoint(x: CGFloat(index) * collectionView.bounds.size.width, y: collectionView.contentOffset.y), animated: true)
+        pageTitleView.setCurrentIndex(index: index, animated: true)
+    }
+    
+    public func numberOfItems(_ pageTitleView: ZKPageTitleView) -> Int {
+        return dataSource?.numberOfPages(self) ?? 0
+    }
+    
+    public func pageTitleView(_ pageTitleView: ZKPageTitleView, itemFor index: Int) -> ZKPageTitleItem {
+        return (dataSource?.pageViewController(self, titleItemFor: index))!
+    }
 }
 
 // MARK: UICollectionViewDelagte & DataSource
@@ -180,32 +193,10 @@ extension ZKPageViewController {
     }
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if(scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
+        if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
             let offsetX = scrollView.contentOffset.x
             let index = offsetX / scrollView.bounds.size.width
             titleView.floatIndex = index
         }
     }
 }
-
-extension ZKPageViewController: ZKPageTitleViewDelegate {
-    
-    public func pageTitleView(_ pageTitleView: ZKPageTitleView, didSelect index: Int) {
-        collectionView.setContentOffset(CGPoint(x: CGFloat(index) * collectionView.bounds.size.width, y: collectionView.contentOffset.y), animated: true)
-        pageTitleView.setCurrentIndex(index: index, animated: true)
-    }
-    
-}
-
-extension ZKPageViewController: ZKPageTitleViewDataSource {
-    
-    public func numberOfItems(_ pageTitleView: ZKPageTitleView) -> Int {
-        return dataSource?.numberOfPages(self) ?? 0
-    }
-    
-    public func pageTitleView(_ pageTitleView: ZKPageTitleView, itemFor index: Int) -> ZKPageTitleItem {
-        return (dataSource?.pageViewController(self, titleItemFor: index))!
-    }
-    
-}
-

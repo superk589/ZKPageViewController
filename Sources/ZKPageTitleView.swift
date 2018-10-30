@@ -78,7 +78,7 @@ open class ZKPageTitleView: UIView {
         }
     }
     
-    public let sliderView = UIView(frame: CGRect.init(x: 0, y: 0, width: 10, height: 2))
+    public let sliderView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 2))
     
     public let titleStackView = UIStackView()
     
