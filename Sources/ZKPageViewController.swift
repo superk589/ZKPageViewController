@@ -124,16 +124,16 @@ open class ZKPageViewController: UIViewController, ZKPageTitleViewDelegate, ZKPa
         titleView.reloadItems()
     }
     
-    public func pageTitleView(_ pageTitleView: ZKPageTitleView, didSelect index: Int) {
+    open func pageTitleView(_ pageTitleView: ZKPageTitleView, didSelect index: Int) {
         collectionView.setContentOffset(CGPoint(x: CGFloat(index) * collectionView.bounds.size.width, y: collectionView.contentOffset.y), animated: true)
         pageTitleView.setCurrentIndex(index: index, animated: true)
     }
     
-    public func numberOfItems(_ pageTitleView: ZKPageTitleView) -> Int {
+    open func numberOfItems(_ pageTitleView: ZKPageTitleView) -> Int {
         return dataSource?.numberOfPages(self) ?? 0
     }
     
-    public func pageTitleView(_ pageTitleView: ZKPageTitleView, itemFor index: Int) -> ZKPageTitleItem {
+    open func pageTitleView(_ pageTitleView: ZKPageTitleView, itemFor index: Int) -> ZKPageTitleItem {
         return (dataSource?.pageViewController(self, titleItemFor: index))!
     }
 }
