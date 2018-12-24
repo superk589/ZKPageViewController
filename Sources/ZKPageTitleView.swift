@@ -15,7 +15,7 @@ public protocol ZKPageTitleViewDelegate: class {
 }
 
 public protocol ZKPageTitleViewDataSource: class {
-    func pageTitleView(_ pageTitleView: ZKPageTitleView, itemFor index: Int) -> ZKPageTitleItem
+    func pageTitleView(_ pageTitleView: ZKPageTitleView, itemFor index: Int) -> ZKPageTitleItem?
     func numberOfItems(_ pageTitleView: ZKPageTitleView) -> Int
 }
 
@@ -116,11 +116,15 @@ open class ZKPageTitleView: UIView {
             return
         }
         for i in 0..<dataSource.numberOfItems(self) {
-            let view = dataSource.pageTitleView(self, itemFor: i)
-            let tap = UITapGestureRecognizer.init(target: self, action: #selector(clickAction(tap:)))
-            view.addGestureRecognizer(tap)
-            view.inoutProgress = 0
-            titleStackView.addArrangedSubview(view)
+            if let view = dataSource.pageTitleView(self, itemFor: i) {
+                let tap = UITapGestureRecognizer.init(target: self, action: #selector(clickAction(tap:)))
+                view.addGestureRecognizer(tap)
+                view.inoutProgress = 0
+                titleStackView.addArrangedSubview(view)
+            } else {
+                let view = ZKPageTitleItem()
+                titleStackView.addArrangedSubview(view)
+            }
         }
         layoutIfNeeded()
         if titleStackView.arrangedSubviews.count > 0 {

@@ -45,13 +45,16 @@ class NormalPageTitleViewController: ZKPageViewController, ZKPageViewControllerD
         return viewControllers[index]
     }
     
-    func pageViewController(_ pageViewController: ZKPageViewController, titleItemFor index: Int) -> ZKPageTitleItem {
+    func pageViewController(_ pageViewController: ZKPageViewController, titleItemFor index: Int) -> ZKPageTitleItem? {
         return titleItems[index]
     }
     
     func pageViewController(_ pageViewController: ZKPageViewController, willShow viewController: UIViewController) {
-        
+        print("will show \(viewController)")
     }
     
+    func pageViewController(_ pageViewController: ZKPageViewController, didRemove viewController: UIViewController) {
+        print("will dismiss \(viewController)")
+    }
 
 }

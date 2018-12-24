@@ -86,7 +86,7 @@ class NavigationTitleExampleViewController: ZKPageViewController, ZKPageViewCont
         return viewControllers[index]
     }
     
-    func pageViewController(_ pageViewController: ZKPageViewController, titleItemFor index: Int) -> ZKPageTitleItem {
+    func pageViewController(_ pageViewController: ZKPageViewController, titleItemFor index: Int) -> ZKPageTitleItem? {
         return titleItems[index]
     }
     
@@ -94,6 +94,9 @@ class NavigationTitleExampleViewController: ZKPageViewController, ZKPageViewCont
         
     }
     
+    func pageViewController(_ pageViewController: ZKPageViewController, didRemove viewController: UIViewController) {
+        
+    }
     
 }
 

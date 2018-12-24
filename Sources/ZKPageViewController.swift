@@ -27,11 +27,12 @@ public extension UIViewController {
 public protocol ZKPageViewControllerDataSource: class {
     func numberOfPages(_ pageViewController: ZKPageViewController) -> Int
     func pageViewController(_ pageViewController: ZKPageViewController, viewControllerAt index: Int) -> UIViewController
-    func pageViewController(_ pageViewController: ZKPageViewController, titleItemFor index: Int) -> ZKPageTitleItem
+    func pageViewController(_ pageViewController: ZKPageViewController, titleItemFor index: Int) -> ZKPageTitleItem?
 }
 
 public protocol ZKPageViewControllerDelegate: class {
     func pageViewController(_ pageViewController: ZKPageViewController, willShow viewController: UIViewController)
+    func pageViewController(_ pageViewController: ZKPageViewController, didRemove viewController: UIViewController)
 }
 
 open class ZKPageViewController: UIViewController, ZKPageTitleViewDelegate, ZKPageTitleViewDataSource {
@@ -58,12 +59,14 @@ open class ZKPageViewController: UIViewController, ZKPageTitleViewDelegate, ZKPa
     open var currentIndex: Int {
         set {
             titleView.currentIndex = newValue
-            collectionView.contentOffset.x = collectionView.bounds.size.width * CGFloat(newValue)
+            scroll(from: currentIndex, to: newValue, animated: true)
         }
         get {
             return titleView.currentIndex
         }
     }
+    
+    open var maximumAnimatedTabInterval: Int = 1
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,6 +119,8 @@ open class ZKPageViewController: UIViewController, ZKPageTitleViewDelegate, ZKPa
             collectionView.layout.invalidateLayout()
             collectionView.contentOffset.x = CGFloat(currentIndex) * collectionView.bounds.width
             titleView.currentIndex = currentIndex
+        } else {
+            collectionView.layout.invalidateLayout()
         }
     }
     
@@ -125,16 +130,21 @@ open class ZKPageViewController: UIViewController, ZKPageTitleViewDelegate, ZKPa
     }
     
     open func pageTitleView(_ pageTitleView: ZKPageTitleView, didSelect index: Int) {
-        collectionView.setContentOffset(CGPoint(x: CGFloat(index) * collectionView.bounds.size.width, y: collectionView.contentOffset.y), animated: true)
+        scroll(from: currentIndex, to: index, animated: true)
         pageTitleView.setCurrentIndex(index: index, animated: true)
+    }
+    
+    private func scroll(from fromIndex: Int, to toIndex: Int, animated: Bool) {
+        let shouldAnimated = animated && abs(toIndex - fromIndex) <= maximumAnimatedTabInterval
+        collectionView.setContentOffset(CGPoint(x: CGFloat(toIndex) * collectionView.bounds.size.width, y: collectionView.contentOffset.y), animated: shouldAnimated)
     }
     
     open func numberOfItems(_ pageTitleView: ZKPageTitleView) -> Int {
         return dataSource?.numberOfPages(self) ?? 0
     }
     
-    open func pageTitleView(_ pageTitleView: ZKPageTitleView, itemFor index: Int) -> ZKPageTitleItem {
-        return (dataSource?.pageViewController(self, titleItemFor: index))!
+    open func pageTitleView(_ pageTitleView: ZKPageTitleView, itemFor index: Int) -> ZKPageTitleItem? {
+        return dataSource?.pageViewController(self, titleItemFor: index)
     }
 }
 
@@ -170,7 +180,13 @@ extension ZKPageViewController: UICollectionViewDelegate, UICollectionViewDataSo
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let vc = dataSource?.pageViewController(self, viewControllerAt: indexPath.item) {
             vc.beginAppearanceTransition(true, animated: false)
-            vc.endAppearanceTransition()
+            delegate?.pageViewController(self, willShow: vc)
+        }
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let vc = dataSource?.pageViewController(self, viewControllerAt: indexPath.item) {
+            delegate?.pageViewController(self, didRemove: vc)
         }
     }
     
