@@ -58,8 +58,8 @@ open class ZKPageViewController: UIViewController, ZKPageTitleViewDelegate, ZKPa
         
     open var currentIndex: Int {
         set {
-            titleView.currentIndex = newValue
             scroll(from: currentIndex, to: newValue, animated: true)
+            titleView.currentIndex = newValue
         }
         get {
             return titleView.currentIndex
