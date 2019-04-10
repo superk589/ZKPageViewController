@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 public extension UIViewController {
-    public var pageViewController: ZKPageViewController? {
+    var pageViewController: ZKPageViewController? {
         var vc = parent
         while vc != nil {
             if vc is ZKPageViewController {

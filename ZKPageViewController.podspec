@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ZKPageViewController"
-  s.version      = "0.2.1"
+  s.version      = "0.3.0"
   s.summary      = "A PageViewController with a custom title view"
   s.description  = <<-DESC
                    A light-weighted PageViewController with a custom title view in swift.
@@ -14,4 +14,5 @@ Pod::Spec.new do |s|
   s.framework  = "UIKit"
   s.dependency "SnapKit"
   s.dependency "DynamicColor"
+  s.swift_version = "5.0"
 end

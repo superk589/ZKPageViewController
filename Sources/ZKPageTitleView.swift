@@ -133,7 +133,7 @@ open class ZKPageTitleView: UIView {
     }
     
     @objc func clickAction(tap: UITapGestureRecognizer) {
-        if let view = tap.view, let index = titleStackView.arrangedSubviews.index(of: view) {
+        if let view = tap.view, let index = titleStackView.arrangedSubviews.firstIndex(of: view) {
             delegate?.pageTitleView(self, didSelect: index)
         }
     }

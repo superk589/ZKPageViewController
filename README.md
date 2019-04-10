@@ -2,8 +2,8 @@
 A PageViewController with a custom title view
 
 ## Requirements
-* Xcode 9.0+
-* Swift 4.0+
+* Xcode 10.2+
+* Swift 5.0+
 * iOS Deployment Target 9.0+
 
 ## Installation
